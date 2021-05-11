@@ -61,7 +61,7 @@ def get_embedding(model, face):
 @st.cache()
 def load_face_model():
 
-  pkl_filename = '/face_model.pkl'
+  pkl_filename = 'face_model.pkl'
   with open(pkl_filename, 'rb') as file:
     face_model = pickle.load(file)
   return face_model
