@@ -7,3 +7,4 @@ scikit-learn==0.22.2.post1
 opencv-python-headless==4.5.2.52
 tensorflow-cpu
 Keras-Applications
+h5py==2.10.0
