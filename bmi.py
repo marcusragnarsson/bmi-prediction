@@ -79,29 +79,39 @@ file = st.file_uploader('Upload An Image',type=['jpg','jpeg'])
 if file:
   model = load_vgg()
   face_model = load_face_model()
-  image = Image.open(file)
-  img_array = np.array(image)
-  extracted = extract_face(img_array)
-  face_embedding = get_embedding(model,extracted)
-  bmi = face_model.predict(face_embedding[0,:,:])
+  try:
+    image = Image.open(file)
+    img_array = np.array(image)
+    extracted = extract_face(img_array)
+    face_embedding = get_embedding(model,extracted)
+    bmi = face_model.predict(face_embedding[0,:,:])
+  
 
 
-#bmi = predict(pixels,model)
 
-  st.title("Here is the image you've selected")
+    #bmi = predict(pixels,model)
+
+    st.title("Here is the image you've selected")
 
   
-  st.image(image)
-  st.title("Here is the predicted BMI:")
+    st.image(image)
+    st.title("Here is the predicted BMI:")
 
-  st.write(round(bmi[0], 2))
-  st.title('Info')
-  info = """
+    st.write(round(bmi[0], 2))
+
+    del(image)
+    del(img_array)
+    del(extracted)
+    del(face_embedding)
+    del(bmi)
+  except:
+    st.write("Face could not be detected, please try with a new image.")
+    
+st.title('Info')
+info = """
     The dataset our model have been trained have a non-uniform distribution. 
     This will make the model more accurate for males compared to females.
     """
-  st.write(info)
-  st.title("Author")
-  st.write("Marcus Ragnarsson")
-
- 
+st.write(info)
+st.title("Author")
+st.write("Marcus Ragnarsson")
