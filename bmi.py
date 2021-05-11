@@ -31,7 +31,6 @@ def load_detector():
   return detector
 
 # extract a single face from a given photograph
-@st.cache()
 def extract_face(pixels, required_size=(224, 224)):
 	detector = load_detector()
 	# detect faces in the image
@@ -47,7 +46,7 @@ def extract_face(pixels, required_size=(224, 224)):
 	face_array = asarray(image)
 	return face_array
 
-@st.cache()
+
 def get_embedding(model, face):
 	# scale pixel values
   face = face.astype('float32')
@@ -68,11 +67,11 @@ def load_face_model():
   
 
 
-st.title('Welcome To our BMI Prediction!')
+st.title('Welcome to our BMI Prediction!')
 instructions = """
-    Please, upload your own image. 
+    Please, upload a image of your face. 
      The image you upload will be fed through the Deep Neural Network in real-time 
-    and the output BMI will be displayed to the screen.
+    and the output BMI will be displayed to the screen. No images are saved on our servers after the prediction is done.
     """
 st.write(instructions)
 image = ''
@@ -95,8 +94,14 @@ if file:
   st.image(image)
   st.title("Here is the predicted BMI:")
 
-   
   st.write(round(bmi[0], 2))
-    
+  st.title('Info')
+  info = """
+    The dataset our model have been trained have a non-uniform distribution. 
+    This will make the model more accurate for males compared to females.
+    """
+  st.write(info)
+  st.title("Author")
+  st.write("Marcus Ragnarsson")
 
  
