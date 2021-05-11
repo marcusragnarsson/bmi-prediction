@@ -75,7 +75,7 @@ instructions = """
     """
 st.write(instructions)
 image = ''
-file = st.file_uploader('Upload An Image',type=['jpg'])
+file = st.file_uploader('Upload An Image',type=['jpg','jpeg'])
 if file:
   model = load_vgg()
   face_model = load_face_model()
